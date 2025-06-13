@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: dps-scraper-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run build && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DPS_USERNAME
+        value: S17530
+      - key: DPS_PASSWORD
+        value: SHAS17530KRI
+    healthCheckPath: /api/status
+    disk:
+      name: dps-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
